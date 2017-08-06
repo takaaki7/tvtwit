@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hubtele.android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name="com.hubtele.android.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic"
+        android:installLocation="internalOnly"
+        android:label="Hubtele"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.hubtele.android.ui.activity.TopActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.hubtele.android.ui.activity.InfoActivity"
+            android:label="@string/app_name">
+
+        </activity>
+        <activity
+            android:name="com.hubtele.android.ui.activity.TimeShiftActivity"
+            android:label="@string/app_name">
+
+        </activity>
+        <activity
+            android:name="com.hubtele.android.ui.activity.ChatActivity"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="com.hubtele.android.ui.activity.WebViewActivity"
+            android:label="@string/app_name"/>
+    </application>
+
+</manifest>

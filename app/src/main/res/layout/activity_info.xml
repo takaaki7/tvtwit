@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:theme="@style/ToolbarTheme" />
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_l" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_l"
+        android:background="@drawable/border_back"
+        android:divider="@drawable/divider_other"
+        android:dividerPadding="@dimen/spacing_m"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <FrameLayout
+            android:id="@+id/aboutRow"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="?attr/selectableItemBackground"
+            android:paddingLeft="@dimen/spacing_m"
+            android:paddingStart="@dimen/spacing_m">
+
+            <TextView
+                android:id="@+id/aboutText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/info_about_this_service"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/inquiryRow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_height_m"
+            android:background="?attr/selectableItemBackground"
+            android:paddingLeft="@dimen/spacing_m">
+
+            <TextView
+                android:id="@+id/inquiryText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/info_inquiry"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/reviewRow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_height_m"
+            android:background="?attr/selectableItemBackground"
+            android:paddingLeft="@dimen/spacing_m"
+            android:paddingStart="@dimen/spacing_m">
+
+            <TextView
+                android:id="@+id/reviewText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/googleplay"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/licenseRow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/row_height_m"
+            android:background="?attr/selectableItemBackground"
+            android:paddingLeft="@dimen/spacing_m"
+            android:paddingStart="@dimen/spacing_m">
+
+            <TextView
+                android:id="@+id/licenseText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/info_licenses"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/row_height_m"
+        android:background="@drawable/border_back"
+        android:paddingLeft="@dimen/spacing_m"
+        android:paddingStart="@dimen/spacing_m">
+
+        <TextView
+            android:id="@+id/versionText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/text_secondory" />
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/spacing_s"
+    android:paddingLeft="@dimen/spacing_s"
+    android:paddingRight="@dimen/spacing_s">
+
+    <TextView
+        android:id="@+id/reply_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chat_reply_message" />
+
+    <EditText
+        android:id="@+id/replyEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reply_title"
+        android:lines="5"
+        android:paddingTop="@dimen/spacing_s" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/replySubmitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/replyEdit"
+        android:layout_marginTop="@dimen/spacing_s"
+        android:background="?attr/selectableItemBackground"
+        android:text="@string/chat_reply_send_button"
+        android:textColor="@color/colorPrimary" />
+</RelativeLayout>

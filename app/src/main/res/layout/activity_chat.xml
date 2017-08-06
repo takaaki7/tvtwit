@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/commentEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_xs"
+            android:layout_marginLeft="@dimen/spacing_s"
+            android:layout_marginRight="@dimen/spacing_xs"
+            android:layout_marginStart="@dimen/spacing_s"
+            android:layout_weight="1"
+            android:hint="@string/chat_edit_comment_hint"
+            android:maxLength="500"
+            app:met_hideUnderline="true" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/commentSubmitButton"
+            android:layout_width="@dimen/button_width_large"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="@string/chat_button_send"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/footer"
+        android:layout_alignParentTop="true">
+
+        <com.hubtele.android.ui.view.ChatRecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clipToPadding="false"
+            android:focusable="true"
+            android:paddingBottom="@dimen/spacing_s"
+            android:paddingTop="@dimen/spacing_s"
+            android:scrollbars="vertical">
+
+            <requestFocus />
+        </com.hubtele.android.ui.view.ChatRecyclerView>
+
+        <com.hubtele.android.ui.view.Scroller
+            android:id="@+id/scroller"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:clipChildren="false"
+            android:clipToPadding="false" />
+    </RelativeLayout>
+
+    <com.hubtele.android.ui.view.ChatToolBar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+</RelativeLayout>

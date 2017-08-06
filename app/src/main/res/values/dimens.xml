@@ -1,0 +1,24 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_s">8dp</dimen>
+    <dimen name="spacing_m">16dp</dimen>
+    <dimen name="spacing_l">24dp</dimen>
+    <dimen name="spacing_xxl">46dp</dimen>
+    <dimen name="spacing_xxxxl">64dp</dimen>
+
+
+    <dimen name="button_width_large">64dp</dimen>
+    <dimen name="row_height_m">52dp</dimen>
+    <dimen name="card_height_l">80dp</dimen>
+    <dimen name="tab_indicator_height">2dp</dimen>
+
+    <dimen name="card_corner_radius">1dp</dimen>
+    <dimen name="card_corner_elevation">2dp</dimen>
+    <dimen name="line_spacing_m">5sp</dimen>
+
+    <dimen name="horizontal_margin_chat_activity">12dp</dimen>
+    <dimen name="rank_body_margin_left">40dp</dimen>
+    <dimen name="scroller_handle_size">30dp</dimen>
+    <dimen name="scroller_handle_elevation">4dp</dimen>
+</resources>

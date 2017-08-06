@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="6dp"
+    android:paddingRight="4dp"
+    android:paddingTop="6dp">
+
+    <RelativeLayout
+        android:id="@+id/entryBodyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/userIconImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:paddingStart="@dimen/spacing_xs" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/spacing_xxxxl">
+
+        <TextView
+            android:id="@+id/userNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/userNameText"
+            android:ellipsize="end"
+            android:lines="1"
+            android:paddingStart="@dimen/spacing_s"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+        <ImageView
+            android:id="@+id/twitterIconImage"
+            android:layout_width="@dimen/spacing_m"
+            android:layout_height="@dimen/spacing_m"
+            android:layout_marginStart="@dimen/spacing_s"
+            android:layout_toEndOf="@id/dateText"/>
+
+        <TextView
+            android:id="@+id/contentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userNameText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    </RelativeLayout>
+</RelativeLayout>
+</LinearLayout>

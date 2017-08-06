@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/scrollerHandle"
+        android:layout_width="@dimen/scroller_handle_size"
+        android:layout_height="@dimen/scroller_handle_size"
+        android:background="@drawable/scroller_handle"
+        android:elevation="@dimen/scroller_handle_elevation"
+        android:visibility="invisible" />
+
+    <!--<ImageView-->
+    <!--android:id="@+id/scrollerBubble"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:contentDescription="Scroll Track"-->
+    <!--android:src="@drawable/scroller_bubble"-->
+    <!--android:visibility="invisible"-->
+    <!--android:layout_marginLeft="2dp"-->
+    <!--android:layout_marginRight="2dp" />-->
+
+</merge>

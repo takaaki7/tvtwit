@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">テレビ実況</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_info">その他</string>
+    <string name="chat_edit_comment_hint">コメントを入力してください</string>
+    <string name="chat_button_send">送信</string>
+    <string name="info_about_this_service">このサービスについて</string>
+    <string name="info_inquiry">お問い合わせ</string>
+    <string name="info_title">その他</string>
+    <string name="googleplay">GooglePlayで評価する</string>
+    <string name="info_licenses">オープンソースライセンス</string>
+    <string name="timeshift_default_time">00:00</string>
+    <string name="timeshift_default_total_time">/ 00:00</string>
+    <string name="timeshift_button_pause">停止</string>
+    <string name="timeshift_button_start">再生</string>
+    <string name="search_edit_count_error">タイトルは50文字以内で入力してください</string>
+    <string name="search_title_no_word_error">番組名を入力してください</string>
+    <string name="search_no_programs_found">該当する番組は見つかりませんでした</string>
+    <string name="tab_title_programs">番組一覧</string>
+    <string name="tab_title_ranking">ランキング</string>
+    <string name="tab_title_search">検索</string>
+    <string name="chat_reply_message">この投稿に返信する</string>
+    <string name="chat_reply_send_button">送信</string>
+    <string name="error_network">ネットワークエラーが発生しました。時間をおいて再度お試しください。</string>
+</resources>

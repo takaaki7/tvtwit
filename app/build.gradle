@@ -1,0 +1,314 @@
+buildscript {
+    ext.kotlin_version = '1.1.2'
+    ext.parcelerVersion = '1.0.4'
+    ext.appVersion = '1.0.5'
+    ext.versionCode = 6
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        classpath 'com.deploygate:gradle:0.6.2'
+        classpath('fr.avianey.androidsvgdrawable:gradle-plugin:3.0.0') {
+            // should be excluded to avoid conflict
+            exclude group: 'xerces'
+        }
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.0"
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+//    dexOptions {
+//    }
+    configurations {
+        androidTestCompile.exclude group: 'com.android.support', module: 'support-v4'
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    defaultConfig {
+        applicationId "com.hubtele.android"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 6
+        multiDexEnabled true
+        versionName "$appVersion"
+    }
+    dexOptions {
+        //最大ヒープサイズを4Gに設定
+        javaMaxHeapSize "4g"
+//        jumboMode true
+
+//        preDexLibraries = true
+    }
+    productFlavors {
+        develop {
+            minSdkVersion 21
+            buildConfigField "String", "API_URL", "\"http://hubtele.net/\""
+
+//            buildConfigField "String", "API_URL", "\"http://192.168.10.2/\""
+//            buildConfigField "String", "API_URL", "\"http://hubtele.net/\""
+        }
+        staging {
+            minSdkVersion 15
+            buildConfigField "String", "API_URL", "\"http://hubtele.net/\""
+
+        }
+        production {
+
+            minSdkVersion 15
+
+            buildConfigField "String", "API_URL", "\"http://hubtele.net/\""
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        main.kotlin.srcDirs += 'src/main/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        androidTest.java.srcDirs += 'src/test/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        test.kotlin.srcDirs += 'src/test/kotlin'
+//        test {
+//            java {
+//                srcDirs += ["src/test/kotlin","src/androidTest/kotlin"]
+//            }
+//        }
+//        test {
+//            kotlin {
+//                srcDirs += ["src/test/kotlin","src/androidTest/kotlin"]
+//            }
+//        }
+//        androidTest {
+//            kotlin {
+//                srcDirs += ["src/test/kotlin","src/androidTest/kotlin"]
+//            }
+//        }
+    }
+    signingConfigs {
+        release {
+
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+            storeFile file("../" + properties.getProperty("release.key.store"))
+            storePassword properties.getProperty("release.key.store.password")
+            keyAlias properties.getProperty("release.key.alias")
+            keyPassword properties.getProperty("release.key.alias.password")
+        }
+        debug {
+
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            storeFile file(System.getenv("HOME") + "/.android/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+//            storeFile file("../" + properties.getProperty("key.store"))
+//            storePassword properties.getProperty("key.store.password")
+//            keyAlias properties.getProperty("key.alias")
+//            keyPassword properties.getProperty("key.alias.password")
+        }
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-debug-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+apply plugin: 'com.google.gms.google-services'
+
+apply plugin: "androidsvgdrawable"
+// create a task to convert SVG to PNG
+task svgToPng(type: fr.avianey.androidsvgdrawable.gradle.SvgDrawableTask) {
+    // specify where to pick SVG from
+    from = files('src/main/svg-mipmap')
+    // specify the android res folder
+    to = file('src/main/res')
+    // create qualified directories if missing
+    createMissingDirectories = true
+    // override files only if necessary
+    overwriteMode = 'ifModified'
+    // let generate PNG for the following densities only
+    targetedDensities = ['hdpi', 'mdpi', 'xhdpi', 'xxhdpi', 'xxxhdpi']
+    // output format of the generated resources
+    outputType = "mipmap"
+}
+//apply plugin: 'android-unit-test'
+dependencies {
+    testCompile 'junit:junit:4.12'
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    //app
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
+    compile 'com.google.android.gms:play-services-analytics:8.1.0'
+    compile 'com.cookpad.puree:puree:4.1.1'
+
+    //dagger
+    compile 'com.google.dagger:dagger:2.0.1'
+    kapt 'com.google.dagger:dagger-compiler:2.0.1'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+    compile 'com.jakewharton.timber:timber:4.1.0'
+    compile 'io.reactivex:rxandroid:1.0.1'
+// Because RxAndroid releases are few and far between, it is recommended you also
+// explicitly depend on RxJava's latest version for bug fixes and new features.
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxkotlin:0.40.1'
+
+    compile 'com.google.code.gson:gson:2.3'
+    compile "org.parceler:parceler-api:${parcelerVersion}"
+    kapt "org.parceler:parceler:${parcelerVersion}"
+
+    //net
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+
+    //socket.io
+    compile 'io.socket:socket.io-client:0.6.2'
+
+    //front
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'com.android.support:cardview-v7:23.2.0'
+    compile 'com.android.support:recyclerview-v7:23.2.0'
+    compile 'com.android.support:design:23.2.0'
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.pnikosis:materialish-progress:1.7'
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.2@aar') {
+        transitive = true
+    }
+    compile('com.mikepenz:aboutlibraries:5.3.3@aar') {
+        transitive = true
+    }
+    compile 'com.android.support:multidex:1.0.1'
+    testCompile "org.robolectric:shadows-multidex:3.0"
+    androidTestCompile('com.android.support.test:runner:0.4') {
+        exclude module: 'support-annotations'
+
+    }
+//    androidTestKapt 'com.google.dagger:dagger-compiler:2.0.1'
+    // Set this dependency to use JUnit 4 rules
+    androidTestCompile('com.android.support.test:rules:0.4') {
+        exclude module: 'support-annotations'
+    }
+    // Set this dependency to build and run Espresso tests
+    //test
+    // Set this dependency if you want to use the Hamcrest matcher library
+    testCompile 'org.hamcrest:hamcrest-library:1.3'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile 'org.robolectric:robolectric:3.0'
+//    androidTestCompile 'org.mockito:mockito-all:1.10.19'
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.1') {
+//        exclude module: 'support-annotations'
+//        exclude group: 'javax.inject'
+//    }
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
+        exclude module: 'support-annotations'
+        exclude group: 'javax.inject'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2') {
+        exclude module: 'support-annotations'
+        exclude group: 'javax.inject'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    //manage tool
+    compile 'com.deploygate:sdk:3.1'
+
+}
+//kapt {
+//    generateStubs = true
+//}
+
+
+apply plugin: 'deploygate'
+
+deploygate {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    userName = properties.getProperty("dgate.username")
+    token = properties.getProperty("dgate.token")
+
+    apks {
+        release {
+            sourceFile = file("build/outputs/apk/app-production-release.apk")
+            //Below is optional
+            message = "release version $appVersion"
+            visibility = "private" // default private
+            releaseNote = "release note sample"
+        }
+
+        debug {
+            sourceFile = file("build/outputs/apk/app-staging-release.apk")
+
+            //Below is optional
+            message = "test upload2 sample"
+            visibility = "private" // default private
+            releaseNote = "release note sample"
+        }
+    }
+}
+//uploadDeployGateRelease.mustRunAfter assembleProductionRelease
+afterEvaluate {
+    assembleProductionRelease.doLast { uploadDeployGateRelease.execute() }
+    assembleStagingRelease.doLast { uploadDeployGateDebug.execute() }
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = []
+        }
+        dx.additionalParameters += '--multi-dex'
+    }
+}

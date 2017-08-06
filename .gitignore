@@ -1,0 +1,12 @@
+.gradle
+gradle.properties
+/local.properties
+/keystores/*
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/gen
+.bashrc
+*.iml
+*.log
